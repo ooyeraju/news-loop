@@ -1,9 +1,11 @@
 {% extends 'layout.html' %}
 {% block content %}
+
+<a href="{{url_for('input')}}"> <h3>search</h3> </a>
 <h1>Top Head Lines </h1>
 
-{% for i in news_head %}
-    <li>{{i}}</li>
+{% for i, j, k in news_material %}
+    <li> <img src="{{k}}" alt="" height="100px" width="200px"> <a href="{{j}}"> {{i}}  </a> <br> <br></li>
 {%endfor %}
 
 {% endblock %}
