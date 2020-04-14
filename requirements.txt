@@ -1,0 +1,7 @@
+This programl requires the following modules
+
+
+
+flask (pip3 install flask)
+requests (pip3 install requests)
+yaml (pip3 install pyyaml)
