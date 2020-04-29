@@ -33,8 +33,8 @@ def input():
     return render_template('input.html')
 
 
-@app.route('/search', methods=['POST', 'GET'])
-def search():
+@app.route('/search_result', methods=['POST', 'GET'])
+def search_result():
     if request.method== 'POST':
         coun_code= request.form['coun_code']
         # print(coun_code)
@@ -49,11 +49,39 @@ def search():
                 news_head.append(a)
         # print(url)
         # print(news_head)
-    return render_template('search.html', news_head=news_head, coun_code = coun_code )
+    return render_template('search_result.html', news_head=news_head, coun_code = coun_code )
     # return 'hi'
 
+
+
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+    if request.method== 'POST':
+        search_key= request.form['search_key']
+        url = ('http://newsapi.org/v2/top-headlines?'
+       'country={}&'
+       'apiKey={}&'
+       'q={}').format('in', ak['api_key'],search_key)
+        top_head = requests.get(url)
+        top_head_json = top_head.json()
+        news_head = []
+        news_link = []
+        news_img = []
+        for i in top_head_json['articles']:
+                a = i['title']
+                b = i['url']
+                c = i['urlToImage']
+                news_head.append(a)
+                news_link.append(b)
+                news_img.append(c)    
+        news_material = zip(news_head, news_link, news_img)
+    return render_template('search.html', news_material = news_material)
 
 
 @app.route('/login')
 def login():
     return render_template('login.html')
+    
+
+if __name__ == "__main__":
+    app.run(debug=True)

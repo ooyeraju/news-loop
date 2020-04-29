@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content%}
+
+<h3> hi bro this is a search engine designed by rajnish</h3>
+<h4> this is the news of country having code {{coun_code}}</h4>
+
+
+{% for i in news_head %}
+    <li>{{i}}</li>
+{%endfor %}
+
+
+
+{% endblock %}
